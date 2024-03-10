@@ -7,6 +7,7 @@ export const isValidEmail = (email: string) => {
 export const isValidPhoneNumber = (phoneNumber: string) => {
   return phoneNumber.match(/^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/);
 };
+
 /*export const saveLoginInfo = (loginInfo: UserInfo) => {
   window.localStorage.setItem(
     process.env.REACT_APP_LOGIN_INFO ?? "",

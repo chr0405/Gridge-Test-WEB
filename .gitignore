@@ -8,3 +8,4 @@ yarn.lock
 build-dev/*
 build-stage/*
 build/*
+config.ts
