@@ -4,7 +4,7 @@ import { InputWrap, LoginButton, LoginRoot, Wrap } from "./styles";
 import { useRecoilState } from "recoil";
 import { jwtState, nameState } from "../../recoil/login";
 import axios from 'axios';
-import * as C from '../../../config';
+import { REST_API_KEY, REDIRECT_URI } from '../../kakaoCode';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -97,9 +97,7 @@ const Login = () => {
   // }
 
   const handleKakaoLogin = async () => {
-    const REST_API_KEY = C.REST_API_KEY;
-    const REDIRECT_URI = C.REST_API_KEY;
-
+    
     const kakaoLoginlink = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
     window.location.href = kakaoLoginlink;

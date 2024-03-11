@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { InputWrap, LoginButton, LoginRoot, Wrap } from "./styles";
-// import { useRecoilState } from "recoil";
-// import { jwtState, nameState } from "../../recoil/login";
+import { useRecoilState } from "recoil";
+import { signUp1State, signUp2State/*, signUp3State*/ } from "../../recoil/signUpPageChange";
 // import axios from 'axios';
 import * as U from "../../utils/utility"
 
 const SignUp = () => {
   const navigate = useNavigate();
+
+  const [, setSignUp1] = useRecoilState(signUp1State);
+  const [, setSignUp2] = useRecoilState(signUp2State);
+  // const [signUp3, setSignUp3] = useRecoilState(signUp3State);
 
   const [phoneNumder, setPhoneNumder] = useState("");
 
@@ -147,13 +151,16 @@ const SignUp = () => {
     else{
       setWarning("");
       // 다음 페이지로 이동하는 코드
+      setSignUp1(false);
+      setSignUp2(true);
+      navigate(`/sign-up`);
     }
   }
 
   // 로그인 이동
-  const handleLogin = () => {
-    navigate(`/login`);
-  }
+  // const handleLogin = () => {
+  //   navigate(`/login`);
+  // }
 
   return (
     <LoginRoot>
@@ -236,12 +243,13 @@ const SignUp = () => {
         <LoginButton
         onClick={signUpCheckFunc}>
           <div>
+            {/* 가입 버튼 */}
             {pwd.length > 5 ? "체크" : "엑스"}
           </div>
         </LoginButton>
         <div>{warning}</div>
       </Wrap>
-
+{/* 
       <Wrap>
        <div>계정이 있으신가요?</div>
        <div
@@ -256,7 +264,7 @@ const SignUp = () => {
           }}
         >
           앱을 다운로드 하세요.
-        </div>
+        </div> */}
     </LoginRoot>
   );
 };
