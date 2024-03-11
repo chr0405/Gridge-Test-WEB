@@ -8,7 +8,7 @@ export const LoginRoot = styled.div`
   justify-content: center;
   width: 1080px;
   height: 100vh;
-  background-color: green;
+  background-color: white;
 
   @media all and (max-width: ${supportDeviceSize}px) {
     width: 100vw;

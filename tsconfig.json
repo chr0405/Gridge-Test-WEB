@@ -33,5 +33,6 @@
     "noImplicitReturns": true, //함수에서 return 빼먹으면 에러내기
     "noFallthroughCasesInSwitch": true //switch문 이상하면 에러내기
   },
-  "include": ["src", "svg.d.ts", "config.ts"]
+  "include": ["src", "svg.d.ts", "config.ts"],
+  "typeRoots": ["src/types"]
 }

@@ -3,7 +3,7 @@ import { JWT_KEY } from "../../config/constant";
 import * as jsonwebtoken from "jsonwebtoken";
 import { JwtPayload } from "jsonwebtoken";
 
-const request: AxiosInstance = axios.create({
+export const request: AxiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API,
   timeout: 2500,
 

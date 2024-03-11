@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { InputWrap, LoginButton, LoginRoot, Wrap } from "./styles";
 import { useRecoilState } from "recoil";
 import { signUp1State, signUp2State/*, signUp3State*/ } from "../../recoil/signUpPageChange";
-// import axios from 'axios';
+import axios from 'axios';
+// import request from '../../apis/core/index';
 import * as U from "../../utils/utility"
 
 const SignUp = () => {
@@ -76,32 +77,32 @@ const SignUp = () => {
 
   // 아이디 유효성 검사
   const [userIdTestAllResult, setUserIdTestAllResult] = useState(false);
-  // const [userIdExistTest, setUserIdExistTest] = useState(false);
+  const [userIdExistTest, setUserIdExistTest] = useState(false);
 
   // API 연결 보류
-  const onBlurUserId = /*async*/ () => {
+  const onBlurUserId = async () => {
 
     // 없앨 거
     console.log(userIdTestAllResult);
 
-    // setUserIdExistTest(await idExistCheck());
+    setUserIdExistTest(await idExistCheck());
 
-    if(userIdTestResult /*&& userIdExistTest*/){
+    if(userIdTestResult && userIdExistTest){
       setUserIdTestAllResult(true);
     }
     else{setUserIdTestAllResult(false);}
   }
 
-  // const idExistCheck = async () => {
-  //   try {
-  //     const response = await axios.get(`https://api-sns.gridge-test.com/users?userId=${userId}`);
-  //     console.log('연결 성공', response);
-  //     return true;
-  //   } catch (error) {
-  //     console.error('오류 발생 : ', error);
-  //     return false;
-  //   }
-  // }
+  const idExistCheck = async () => {
+    try {
+      const response = await axios.get(`https://api-sns.gridge-test.com/users?loginId=abcd1234`);
+      console.log('연결 성공', response);
+      return true;
+    } catch (error) {
+      console.error('오류 발생 : ', error);
+      return false;
+    }
+  }
 
   // 비밀번호
   const [pwd, setPwd] = useState('');
@@ -158,9 +159,9 @@ const SignUp = () => {
   }
 
   // 로그인 이동
-  // const handleLogin = () => {
-  //   navigate(`/login`);
-  // }
+  const handleLogin = () => {
+    navigate(`/login`);
+  }
 
   return (
     <LoginRoot>
@@ -249,7 +250,7 @@ const SignUp = () => {
         </LoginButton>
         <div>{warning}</div>
       </Wrap>
-{/* 
+
       <Wrap>
        <div>계정이 있으신가요?</div>
        <div
@@ -264,7 +265,7 @@ const SignUp = () => {
           }}
         >
           앱을 다운로드 하세요.
-        </div> */}
+        </div>
     </LoginRoot>
   );
 };

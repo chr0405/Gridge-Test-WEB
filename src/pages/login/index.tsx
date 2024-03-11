@@ -1,10 +1,20 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { InputWrap, LoginButton, LoginRoot, Wrap } from "./styles";
+import * as S from "./styles";
 import { useRecoilState } from "recoil";
 import { jwtState, nameState } from "../../recoil/login";
 import axios from 'axios';
 import { REST_API_KEY, REDIRECT_URI } from '../../kakaoCode';
+import styled from 'styled-components';
+
+import iphone1 from '../../img/iphone 13 mini.png';
+import iphone2 from '../../img/iphone 13 mini (1).png';
+import logo from '../../img/mainlogo.png';
+import mail from '../../img/mail.png';
+import lock from '../../img/mail (1).png';
+import kakao from '../../img/Frame 10725.png';
+import PlayStore from '../../img/Mobile app store badge.png';
+import AppStore from '../../img/Mobile app store badge (1).png';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -109,93 +119,126 @@ const Login = () => {
   }
 
   return (
-    <LoginRoot>
-      <Wrap>
+    <S.LoginRoot>
+      <S.BasicWrap>
+        <S.Img src={iphone1}/>
+        <S.Img2 src={iphone2}/>
+      </S.BasicWrap>
+      <S.MainDiv>
+        <S.LoginBox>
 
-        <InputWrap
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="전화번호, 사용자 이름 또는 이메일"
-          onKeyUp={onKeyUpId}
-        />
+          <S.Logo src={logo}/>
 
-        <div>
-          <InputWrap
-          type = {hide ? 'password' : 'text'}
-          value={pwd}
-          onChange={(e) => setPwd(e.target.value)}
-          placeholder="비밀번호"
-          onKeyUp={onKeyUpPassword}
-          />
-        {pwd.length > 0 && (
-          <div
-          onClick={() => onToggleHide()}
-          style={{ 
-            fontSize: "1.8rem",
-            fontWeight: "600",
-            marginBottom: "1rem" }}>
-            {hide ? "비밀번호 표시" : "숨기기"}
-          </div>
-        )}
-        </div>
-
-        <LoginButton
-        onClick={isLoginButtonEnabled? handleLogin : undefined}>
+          <S.IdDiv>
+            <S.mailImg src={mail}/>
+            <S.mailInput
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="전화번호, 사용자 이름 또는 이메일"
+            onKeyUp={onKeyUpId}
+            />
+          </S.IdDiv>
+          
+          <S.PasswordDiv>
+            <S.lockImg src={lock}/>
+            <S.PasswordInput
+            type = {hide ? 'password' : 'text'}
+            value={pwd}
+            onChange={(e) => setPwd(e.target.value)}
+            placeholder="비밀번호"
+            onKeyUp={onKeyUpPassword}
+            />
+            {pwd.length > 0 && (
+              <PasswordDisplay
+              hide={hide}
+              onClick={() => onToggleHide()}>
+                {hide ? "비밀번호 표시" : "숨기기"}
+              </PasswordDisplay>
+            )}
+          </S.PasswordDiv>
+          <LoginBtn
+          isLoginButtonEnabled={isLoginButtonEnabled}
+          onClick={isLoginButtonEnabled ? handleLogin : undefined}
+          >
           로그인
-        </LoginButton>
-        <div
-          style={{
-            fontSize: "1.8rem",
-            fontWeight: "600",
-            marginBottom: "1rem",
-          }}
-        >
-          or
-        </div>
-        <LoginButton
-        onClick={handleKakaoLogin}>카카오 로그인</LoginButton>
-        <div
-          style={{
-            fontSize: "1.8rem",
-            fontWeight: "600",
-            marginBottom: "1rem",
-          }}
-        >
-          비밀번호를 잊으셨나요?
-        </div>
-      </Wrap>
-      <Wrap>
-        <div
-          style={{
-            fontSize: "1.8rem",
-            fontWeight: "600",
-            marginBottom: "1rem",
-          }}
-        >
-          계정이 없으신가요?
-        </div>
-        <div
-          style={{
-            fontSize: "1.8rem",
-            fontWeight: "600",
-            marginBottom: "1rem",
-          }}
-          onClick={handleSignUp}
-        >
-          가입하기
-        </div>
-      </Wrap>
-      <div
-          style={{
-            fontSize: "1.8rem",
-            fontWeight: "600",
-            marginBottom: "1rem",
-          }}
-        >
-          앱을 다운로드 하세요.
-        </div>
-    </LoginRoot>
+          </LoginBtn>
+          <S.Or>
+            or
+          </S.Or>
+          <S.KaKaoLoginBtn
+          onClick={handleKakaoLogin}>
+            <S.KakaoImg src={kakao}/>
+            <S.KakaoText>카카오 로그인</S.KakaoText>
+          </S.KaKaoLoginBtn>
+          <S.WarningText>
+            잘못된 비밀번호입니다. 다시 확인하세요.
+          </S.WarningText>
+          <S.ForgottenPwd>
+            비밀번호를 잊으셨나요?
+          </S.ForgottenPwd>
+        </S.LoginBox>
+
+        <S.SignUpBox>
+          <S.HaveAnAccount>
+            계정이 없으신가요?
+          </S.HaveAnAccount>
+          <S.GoToSignUp
+          onClick={handleSignUp}>
+            가입하기
+          </S.GoToSignUp>
+        </S.SignUpBox>
+        <S.AppDownloadBox>
+          <S.AppDownloadText>앱을 다운로드 하세요.</S.AppDownloadText>
+          <div>
+            <S.PlayStoreImg src={PlayStore}/>
+            <S.AppStoreImg src={AppStore}/>
+          </div>
+        </S.AppDownloadBox>
+      </S.MainDiv>
+    </S.LoginRoot>
   );
 };
 
 export default Login;
+
+interface LoginBtnProps {
+  isLoginButtonEnabled: boolean;
+}
+
+const LoginBtn = styled.button<LoginBtnProps>`
+  width: 320px;
+  height: 44px;
+
+  border-radius: 30px;
+  border-width: 0px;
+  
+  /* position: absolute;
+  top: 337px; */
+
+  margin-top: 20px;
+  
+  font-weight: 600;
+  font-size: 16px;
+  color: white;
+  line-height: 24px;
+  text-align: center;
+  
+  background-color: ${props => props.isLoginButtonEnabled ? '#2E90FA' : '#B2DDFF'};
+`;
+
+interface PasswordDisplayProps {
+  hide: boolean;
+}
+
+const PasswordDisplay = styled.div<PasswordDisplayProps>`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+
+  position: absolute;
+  left: ${props => props.hide? '200px' : '250px'};
+
+  text-align: right;
+
+  color: #191919;
+`;
