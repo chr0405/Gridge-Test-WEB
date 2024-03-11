@@ -1,11 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { InputWrap, LoginButton, LoginRoot, Wrap } from "./styles";
+import * as S from "./styles";
 import { useRecoilState } from "recoil";
 import { signUp1State, signUp2State/*, signUp3State*/ } from "../../recoil/signUpPageChange";
 import axios from 'axios';
+import styled from 'styled-components';
+
 // import request from '../../apis/core/index';
 import * as U from "../../utils/utility"
+import iphone1 from '../../img/iphone 13 mini.png';
+import iphone2 from '../../img/iphone 13 mini (1).png';
+import logo from '../../img/mainlogo.png';
+import kakao from '../../img/Frame 10725.png';
+import mail from '../../img/mail.png';
+import lock from '../../img/mail (1).png';
+import settings from '../../img/settings.png';
+import user from '../../img/user.png';
+import PlayStore from '../../img/Mobile app store badge.png';
+import AppStore from '../../img/Mobile app store badge (1).png';
+import xImg from '../../img/x-circle.png';
+import checkImg from '../../img/x-circle (1).png';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -164,110 +178,142 @@ const SignUp = () => {
   }
 
   return (
-    <LoginRoot>
-      <Wrap>
-        <div>
-          친구들과 함께 여행 이야기를 공유하고 보세요.
-        </div>
-        <LoginButton>카카오 로그인</LoginButton>
-        
-        <div>
-          or
-        </div>
+    <S.LoginRoot>
+      <S.BasicWrap>
+        <S.Img src={iphone1}/>
+        <S.Img2 src={iphone2}/>
+      </S.BasicWrap>
+      <S.MainDiv>
+        <S.SignUpBox>
+      
+          <S.Logo src={logo}/>
+          <S.LogoTextDiv>
+            친구들과 함께 여행 이야기를 공유하고 보세요.
+          </S.LogoTextDiv>
 
-        <div>
-          <p>문자</p>
-          <InputWrap
-          value={phoneNumder}
-          onChange={(e) => setPhoneNumder(e.target.value)}
-          placeholder="전화번호, 사용자 이름 또는 이메일"
-          onKeyUp={onKeyUpPhoneNumder}
-          />
-          {phoneNumder.length > 0 && (
-          <div>
-            {U.isValidPhoneNumber(phoneNumder) ? "체크" : "엑스"}
-          </div>
-          )}
-        </div>
-        
-        <div>
-          <p>사람</p>
-          <InputWrap
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-          placeholder="성명"
-          onKeyUp={onKeyUpUserName}
-          />
-          {userName.length ? "표시" : "" }
-        </div>
+          <S.KaKaoLoginBtn>
+            <S.KakaoImg src={kakao}/>
+            <S.KakaoText>카카오 로그인</S.KakaoText>
+          </S.KaKaoLoginBtn>
+          
+          <S.Or>
+            or
+          </S.Or>
 
-        <div>
-          <p>톱니바퀴</p>
-          <InputWrap
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
-          placeholder="사용자 이름"
-          onKeyUp={onKeyUpUserId}
-          onBlur={onBlurUserId}
-          />
-          {userId.length > 0 && (
-          <div>
-            {userIdTestAllResult ? "체크" : "엑스"}
-          </div>
-          )}
-        </div>
-        
-        <div>
-          <p>자물쇠</p>
-          <InputWrap
-          type = {hide ? 'password' : 'text'}
-          value={pwd}
-          onChange={(e) => setPwd(e.target.value)}
-          placeholder="비밀번호"
-          onKeyUp={onKeyUpPwd}
-          />
-          {pwd.length > 0 && (
-          <div>
-            {pwdTest.test(pwd) ? "체크" : "엑스"}
-            <div
-            onClick={() => onToggleHide()}
-            style={{ 
-              fontSize: "1.8rem",
-              fontWeight: "600",
-              marginBottom: "1rem" }}>
-              {hide ? "비밀번호 표시" : "숨기기"}
+          <S.InputDiv>
+            <S.InputImg src={mail}/>
+            <S.SignUpInput
+            value={phoneNumder}
+            onChange={(e) => setPhoneNumder(e.target.value)}
+            placeholder="전화번호, 사용자 이름 또는 이메일"
+            onKeyUp={onKeyUpPhoneNumder}
+            />
+            {phoneNumder.length > 0 && (
+            <div>
+              {U.isValidPhoneNumber(phoneNumder) ? <S.CheckImg src={checkImg}/> : <S.CheckImg src={xImg}/>}
             </div>
-          </div>
-          )}
-        </div>
+            )}
+          </S.InputDiv>
+          
+          <S.InputDiv>
+            <S.InputImg src={user}/>
+            <S.SignUpInput
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+            placeholder="성명"
+            onKeyUp={onKeyUpUserName}
+            />
+            {userName.length ? <S.CheckImg2 src={checkImg}/> : "" }
+          </S.InputDiv>
 
-        <LoginButton
-        onClick={signUpCheckFunc}>
-          <div>
-            {/* 가입 버튼 */}
-            {pwd.length > 5 ? "체크" : "엑스"}
-          </div>
-        </LoginButton>
-        <div>{warning}</div>
-      </Wrap>
+          <S.InputDiv>
+            <S.InputImg src={settings}/>
+            <S.SignUpInput
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
+            placeholder="사용자 이름"
+            onKeyUp={onKeyUpUserId}
+            onBlur={onBlurUserId}
+            />
+            {userId.length > 0 && (
+            <div>
+              {userIdTestAllResult ? <S.CheckImg3 src={checkImg}/> : <S.CheckImg3 src={xImg}/>}
+            </div>
+            )}
+          </S.InputDiv>
+          
+          <S.InputDiv>
+            <S.InputImg src={lock}/>
+            <S.SignUpInput
+            type = {hide ? 'password' : 'text'}
+            value={pwd}
+            onChange={(e) => setPwd(e.target.value)}
+            placeholder="비밀번호"
+            onKeyUp={onKeyUpPwd}
+            />
+            {pwd.length > 0 && (
+            <S.PwdDiv>
+              {pwdTest.test(pwd) ? <S.CheckImg4 src={checkImg}/> : <S.CheckImg4 src={xImg}/>}
+              <S.PasswordDisplay
+              onClick={() => onToggleHide()}>
+                {hide ? "비밀번호 표시" : "숨기기"}
+              </S.PasswordDisplay>
+            </S.PwdDiv>
+            )}
+          </S.InputDiv>
 
-      <Wrap>
-       <div>계정이 있으신가요?</div>
-       <div
-       onClick={handleLogin}
-       >로그인</div>
-      </Wrap>
-      <div
-          style={{
-            fontSize: "1.8rem",
-            fontWeight: "600",
-            marginBottom: "1rem",
-          }}
-        >
+          <LoginBtn
+          pwd={pwd}
+          onClick={signUpCheckFunc}>
+            가입
+          </LoginBtn>
+          <S.WarningText>{warning}</S.WarningText>
+        </S.SignUpBox>
+        
+      <S.LoginBox>
+        <S.HaveAnAccount>계정이 있으신가요?</S.HaveAnAccount>
+        <S.GoToLogin
+        onClick={handleLogin}
+        >로그인</S.GoToLogin>
+      </S.LoginBox>
+      <S.AppDownloadBox>
+        <S.AppDownloadText>
           앱을 다운로드 하세요.
+        </S.AppDownloadText>
+        <div>
+          <S.PlayStoreImg src={PlayStore}/>
+          <S.AppStoreImg src={AppStore}/>
         </div>
-    </LoginRoot>
+      </S.AppDownloadBox>
+      </S.MainDiv>
+    </S.LoginRoot>
   );
 };
 
 export default SignUp;
+
+interface SignUpBtnProps {
+  pwd: string;
+}
+
+const LoginBtn = styled.button<SignUpBtnProps>`
+  width: 320px;
+  height: 44px;
+
+  border-radius: 30px;
+  border-width: 0px;
+  
+  /* position: absolute;
+  top: 337px; */
+
+  margin-top: 20px;
+  margin-bottom: 40px;
+  
+  font-weight: 600;
+  font-size: 16px;
+  color: white;
+  line-height: 24px;
+  text-align: center;
+  
+  background-color: ${props => props.pwd.length > 5 ? '#2E90FA' : '#B2DDFF'};
+`;
