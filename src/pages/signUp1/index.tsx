@@ -68,8 +68,15 @@ const SignUp = () => {
 
   // 아이디
   const [userId, setUserId] = useState("");
+
+  // 아이디 유효성 검사
+  const [userIdTestAllResult, setUserIdTestAllResult] = useState(false);
+  // 아이디 중복
+  const [userIdExistTest, setUserIdExistTest] = useState(false);
+  // 아이디는 문자, 숫자, 밑줄 및 마침표만
   const [userIdTestResult, setUserIdTestResult] = useState(false);
 
+  // 아이디 유효 문자 test
   const onKeyUpUserId = (event: React.KeyboardEvent<HTMLElement>) => {
     const inputElement = event.target as HTMLInputElement;
     const inputValue = inputElement.value;
@@ -84,40 +91,60 @@ const SignUp = () => {
     if (key === "Enter" || key === 13) {
       return; 
     }
-
-    const userIdTest = /^[a-z0-9_.]+$/;
-    setUserIdTestResult(userIdTest.test(userId));
   };
 
-  // 아이디 유효성 검사
-  const [userIdTestAllResult, setUserIdTestAllResult] = useState(false);
-  const [userIdExistTest, setUserIdExistTest] = useState(false);
-
-  // API 연결 보류
-  const onBlurUserId = async () => {
-
-    // 없앨 거
-    console.log(userIdTestAllResult);
-
-    setUserIdExistTest(await idExistCheck());
-
-    if(userIdTestResult && userIdExistTest){
-      setUserIdTestAllResult(true);
-    }
-    else{setUserIdTestAllResult(false);}
-  }
-
+  // 아이디 중복 test
   const idExistCheck = async () => {
+    const loginId : string = userId;
+    // 추후 삭제
+    console.log('idExistCheck func');
+
     try {
-      const response = await axios.get(`https://api-sns.gridge-test.com/users?loginId=abcd1234`);
-      console.log('연결 성공', response);
-      return true;
+      const response = await axios.get(`https://api-sns.gridge-test.com/users?loginId=${loginId}`);
+      // 추후 삭제
+      const isExist = response.data.result.isExist;
+      // console.log(isExist);
+      if(isExist){
+        setUserIdExistTest(false);
+      } else {
+        setUserIdExistTest(true);
+      }
     } catch (error) {
+      // 추후 삭제
       console.error('오류 발생 : ', error);
-      return false;
     }
   }
+  
+  const idAllCheckFunc = async () => {
+    
+      // 없앨 거
+      console.log('userId : ', userId);
 
+      idExistCheck();
+
+      // 유효성 test 모두 통과했는지
+      const userIdTest = /^[a-z0-9_.]+$/;
+      setUserIdTestResult(userIdTest.test(userId));
+      console.log('유효성 test : ', userIdTestResult);
+
+      console.log('userIdTestResult : ', userIdTestResult);
+      console.log('userIdExistTest : ', userIdExistTest);
+
+      // 아이디 기준이 충족하면서
+      // 아이디가 중복되지 않음.
+      if(userIdTestResult && userIdExistTest){
+        setUserIdTestAllResult(true);
+        console.log('idAllCheckFunc 아이디 사용 가능', userIdTestAllResult);
+
+      }
+      else{
+        setUserIdTestAllResult(false);
+        console.log('idAllCheckFunc 아이디 사용 불가', userIdTestAllResult);
+        }
+  }
+
+  
+  
   // 비밀번호
   const [pwd, setPwd] = useState('');
 
@@ -138,7 +165,7 @@ const SignUp = () => {
   };
 
   // 비밀번호 유효성 검사
-  const pwdTest = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{}|;:,.<>?]).{8,}$/;
+  const pwdTest = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{}|;:,.<>?]).{7,}$/;
 
   // 비밀번호 표시
   const [hide, setHide] = useState(true);
@@ -154,13 +181,13 @@ const SignUp = () => {
   const signUpCheckFunc = () => {
     if(! U.isValidPhoneNumber(phoneNumder)){
       setWarning("휴대폰 번호가 정확하지 않습니다. 국가번호를 포함하여 전체 전화번호를 입력해주세요.");
-    } else if(! userIdTestAllResult){
-      console.log(userIdTestAllResult);
+    } else if(! userIdTestResult){
+      // console.log(userIdTestAllResult);
       setWarning("사용자 이름에는 문자, 숫자, 밑줄 및 마침표만 사용할 수 있습니다");
-    } /* else if(! userIdExistTest){
+    } else if(! userIdExistTest){
       setWarning("사용할 수 없는 사용자 이름입니다. 다른 이름을 사용하세요.");
-      setSignUpCheckBtn(false);
-    }*/ else if(!(pwdTest.test(pwd) && pwd.length > 5)){
+      // setSignUpCheckBtn(false);
+    } else if(!(pwdTest.test(pwd) && pwd.length > 5)){
       setWarning("");
     }
     else{
@@ -219,7 +246,7 @@ const SignUp = () => {
             <S.InputImg src={user}/>
             <S.SignUpInput
             value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={(e) => {setUserName(e.target.value)}}
             placeholder="성명"
             onKeyUp={onKeyUpUserName}
             />
@@ -230,10 +257,12 @@ const SignUp = () => {
             <S.InputImg src={settings}/>
             <S.SignUpInput
             value={userId}
-            onChange={(e) => setUserId(e.target.value)}
+            onChange={(e) => {
+              setUserId(e.target.value)
+            }}
+            onKeyUp={() => {onKeyUpUserId
+                      idAllCheckFunc()}}
             placeholder="사용자 이름"
-            onKeyUp={onKeyUpUserId}
-            onBlur={onBlurUserId}
             />
             {userId.length > 0 && (
             <div>
@@ -273,8 +302,9 @@ const SignUp = () => {
       <S.LoginBox>
         <S.HaveAnAccount>계정이 있으신가요?</S.HaveAnAccount>
         <S.GoToLogin
-        onClick={handleLogin}
-        >로그인</S.GoToLogin>
+        onClick={handleLogin}>
+        로그인
+        </S.GoToLogin>
       </S.LoginBox>
       <S.AppDownloadBox>
         <S.AppDownloadText>

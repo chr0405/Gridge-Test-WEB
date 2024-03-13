@@ -75,6 +75,9 @@ const Login = () => {
   const isLoginButtonEnabled = name.length >= 1 && pwd.length >= 6;
 
   // 로그인 버튼 클릭
+
+  const [warningText, setWarningText] = useState('');
+
   const handleLogin = async () => {
 
     const loginId = name;
@@ -89,22 +92,45 @@ const Login = () => {
         `https://api-sns.gridge-test.com/auth/sign-in`,
         { loginId, password }
       );
+      // 추후 삭제
       console.log("연결 성공", response);
       setJwt("success login");
     } catch (error) {
-      console.error('오류 발생 : ', error);
+      // 추후 삭제
+      console.log('오류 발생 : ', error);
+      if (axios.isAxiosError(error)) {
+        // 추후 삭제
+        console.log('response : ', error.response?.data);
+        const errorResponse = error.response?.data.statusCode;
+        if (errorResponse) {
+          if(errorResponse === 404){
+            idExistCheck();
+          }
+        }
+      }
     }
   };
 
-  // const idExistCheck = async() => {
-  //   const loginId = name;
-  //   try{
-  //     const response = await axios.get(`https://api-sns.gridge-test.com/users?userId=${loginId}`);
-  //     console.log('연결 성공', response);
-  //   } catch (error) {
-  //     console.error('오류 발생 : ', error);
-  //   }
-  // }
+  const idExistCheck = async() => {
+    const loginId : string = name;
+    // 추후 삭제
+    console.log('idExistCheck func');
+    console.log(loginId);
+    try{
+      const response = await axios.get(`https://api-sns.gridge-test.com/users?loginId=${loginId}`);
+      // 추후 삭제
+      const isExist = response.data.result.isExist;
+      console.log(isExist);
+      if(isExist){
+        setWarningText('잘못된 비밀번호입니다. 다시 확인하세요.');
+      } else {
+        setWarningText('입력한 사용자 이름을 사용하는 계정을 찾을 수 없습니다. 사용자 이름을 확인하고 다시 시도하세요.');
+      }
+    } catch (error) {
+      // 추후 삭제
+      console.error('오류 발생 : ', error);
+    }
+  }
 
   const handleKakaoLogin = async () => {
     
@@ -171,7 +197,7 @@ const Login = () => {
             <S.KakaoText>카카오 로그인</S.KakaoText>
           </S.KaKaoLoginBtn>
           <S.WarningText>
-            잘못된 비밀번호입니다. 다시 확인하세요.
+            {warningText}
           </S.WarningText>
           <S.ForgottenPwd>
             비밀번호를 잊으셨나요?
@@ -236,7 +262,7 @@ const PasswordDisplay = styled.div<PasswordDisplayProps>`
   line-height: 24px;
 
   position: absolute;
-  left: ${props => props.hide? '200px' : '250px'};
+  left: ${props => props.hide? '250px' : '300px'};
 
   text-align: right;
 

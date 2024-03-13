@@ -210,11 +210,12 @@ export const KakaoText = styled.p`
 
 export const WarningText = styled.p`
   font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 20px;
   text-align: center;
 
   margin-bottom: 10px;
+  padding: 0px 20px;
 
   color: #F04438;
 `;
