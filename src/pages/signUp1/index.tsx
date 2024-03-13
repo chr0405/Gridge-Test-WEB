@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import * as S from "./styles";
 import { useRecoilState } from "recoil";
 import { signUp1State, signUp2State/*, signUp3State*/ } from "../../recoil/signUpPageChange";
+import { loginIdInfoState, passwordInfoState, realNameInfoState, phoneInfoState} from "../../recoil/signUpInfo";
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -28,9 +29,10 @@ const SignUp = () => {
   const [, setSignUp2] = useRecoilState(signUp2State);
   // const [signUp3, setSignUp3] = useRecoilState(signUp3State);
 
-  const [phoneNumder, setPhoneNumder] = useState("");
-
   // 휴대폰 번호
+
+  const [phoneNumder, setPhoneNumder] = useRecoilState(phoneInfoState);
+
   const onKeyUpPhoneNumder = (event: React.KeyboardEvent<HTMLElement>) => {
     const inputElement = event.target as HTMLInputElement;
     const inputValue = inputElement.value;
@@ -48,7 +50,8 @@ const SignUp = () => {
   };
 
   // 성명
-  const [userName, setUserName] = useState("");
+
+  const [userName, setUserName] = useRecoilState(realNameInfoState);
 
   const onKeyUpUserName = (event: React.KeyboardEvent<HTMLElement>) => {
     const inputElement = event.target as HTMLInputElement;
@@ -67,7 +70,7 @@ const SignUp = () => {
   };
 
   // 아이디
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useRecoilState(loginIdInfoState);
 
   // 아이디 유효성 검사
   const [userIdTestAllResult, setUserIdTestAllResult] = useState(false);
@@ -146,7 +149,7 @@ const SignUp = () => {
   
   
   // 비밀번호
-  const [pwd, setPwd] = useState('');
+  const [pwd, setPwd] = useRecoilState(passwordInfoState);
 
   const onKeyUpPwd = (event: React.KeyboardEvent<HTMLElement>) => {
     const inputElement = event.target as HTMLInputElement;

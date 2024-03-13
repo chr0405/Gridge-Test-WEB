@@ -4,7 +4,8 @@ import * as S from "./styles";
 import { useRecoilState } from "recoil";
 import { jwtState, nameState } from "../../recoil/login";
 import axios from 'axios';
-import { REST_API_KEY, REDIRECT_URI } from '../../kakaoCode';
+// import { REST_API_KEY, REDIRECT_URI } from '../../kakaoCode';
+import userApis from '../../apis/userApis';
 import styled from 'styled-components';
 
 import iphone1 from '../../img/iphone 13 mini.png';
@@ -20,7 +21,7 @@ const Login = () => {
   const navigate = useNavigate();
   
   const [name, setName] = useRecoilState(nameState);
-  const [, setJwt] = useRecoilState(jwtState);
+  const [jwt, setJwt] = useRecoilState(jwtState);
 
   // 아이디
   const onKeyUpId = (event: React.KeyboardEvent<HTMLElement>) => {
@@ -94,7 +95,10 @@ const Login = () => {
       );
       // 추후 삭제
       console.log("연결 성공", response);
-      setJwt("success login");
+      console.log('jwt 넣을게요');
+      setJwt(response.data.result.jwt);
+      console.log(jwt);
+      localStorage.setItem('jwt', jwt);
     } catch (error) {
       // 추후 삭제
       console.log('오류 발생 : ', error);
@@ -134,9 +138,18 @@ const Login = () => {
 
   const handleKakaoLogin = async () => {
     
-    const kakaoLoginlink = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    // const kakaoLoginlink = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
-    window.location.href = kakaoLoginlink;
+    // window.location.href = kakaoLoginlink;
+
+    // 임시로 토큰 사용 api 연결 test
+    // 추후 삭제
+    try{
+      const response = await userApis.profile(name);
+      console.log('잘 받았어요 : ', response);
+    } catch(error){
+      console.log('잘 못 받았어요');
+    }
   };
 
   // 가입하기 이동

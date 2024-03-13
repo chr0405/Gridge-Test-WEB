@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import * as S from "./styles";
 import { useRecoilState } from "recoil";
 import { signUp1State, signUp2State/*, signUp3State*/ } from "../../recoil/signUpPageChange";
+import { loginIdInfoState, passwordInfoState, realNameInfoState, phoneInfoState, birthDateInfoState} from "../../recoil/signUpInfo";
+import axios from 'axios';
 import styled from 'styled-components';
 
 import iphone1 from '../../img/iphone 13 mini.png';
@@ -26,6 +28,7 @@ const SignUp3 = () => {
 
     useEffect(() => {
         checkAllFunc();
+        console.log();
     }, [check1, check2, check3]);
 
     // 세 개 다 체크하면 자동으로 모두 동의도 체크
@@ -44,7 +47,55 @@ const SignUp3 = () => {
         navigate(`/sign-up`);
     }
 
+    const [phone, ] = useRecoilState(phoneInfoState);
+    const [realName, ] = useRecoilState(realNameInfoState);
+    const [loginId, ] = useRecoilState(loginIdInfoState);
+    const [password, ] = useRecoilState(passwordInfoState);
+    const [birthDate, ] = useRecoilState(birthDateInfoState);
+
+    const [statusNumber, setStatusNumber] = useState(0);
+
+    const sendUserInfoFunc = async () => {
+        // 추후 삭제
+        console.log('sendUserInfoFunc');
+        console.log(phone);
+        console.log(realName);
+        console.log(loginId);
+        console.log(password);
+        console.log(birthDate);
+    
+        try {
+          const response = await axios.post(`https://api-sns.gridge-test.com/auth/sign-up`, {
+            loginId,
+            password,
+            realName,
+            phone,
+            birthDate
+          });
+          // 추후 삭제
+          console.log(response.status);
+          setStatusNumber(response.status);
+        } catch (error) {
+          // 추후 삭제
+          console.error('오류 발생 : ', error);
+        }
+      }
+
     // 로그인
+
+    const NextFunc = () => {
+        sendUserInfoFunc();
+        if(statusNumber === 201){
+            setSignUp1(true);
+            setSignUp2(false);
+            navigate(`/login`);
+        } else if(statusNumber === 201){
+            alert('아이디가 중복되었거나 조건에 맞지 않습니다. 다시 시도해주세요.');
+        } else{
+            alert('서버 에러');
+        }
+    }
+
     const backToLogin = () => {
         setSignUp1(true);
         setSignUp2(false);
@@ -110,7 +161,7 @@ const SignUp3 = () => {
                     checkAll={checkAll}
                     onClick={()=>{
                         if(checkAll)
-                            backToLogin();
+                            NextFunc();
                     }}>
                         다음
                     </NextBtn>

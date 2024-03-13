@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import * as S from "./styles";
 import { useRecoilState } from "recoil";
 import { signUp1State, signUp2State/*, signUp3State*/ } from "../../recoil/signUpPageChange";
+import { birthDateInfoState } from "../../recoil/signUpInfo";
 import styled from 'styled-components';
 
 import iphone1 from '../../img/iphone 13 mini.png';
@@ -58,9 +59,20 @@ const SignUp2 = () => {
         }
     };
 
+    // 가입 버튼
+
+    const [birthDateAll, setBirthDateAll] = useRecoilState(birthDateInfoState);
+
     const signUpCheckFunc = () => {
         console.log(passSignUp);
-        console.log(userBornYear);
+
+        const formattedMonth = String(userBornMonth).padStart(2, '0');
+        const formattedDate = String(userBornDate).padStart(2, '0');
+        
+        const formattedData = `${userBornYear}-${formattedMonth}-${formattedDate}`;
+
+        setBirthDateAll(formattedData);
+        console.log(birthDateAll);
 
         if(passSignUp){
             setSignUp1(false);
