@@ -1,41 +1,108 @@
 import styled from "styled-components";
 
 export const Header = styled.div`
-  background-color: red;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 3px 16px 0 rgba(0, 0, 0, 0.06);
+  justify-content: center;
+  width: 1440px;
+  height: 80px;
+  background-color: white;
 
-  margin: 1rem;
-  padding: 1rem;
+  border-bottom: 1px solid gray;
 `;
 
-export const Wrap = styled.div`
+export const Logo = styled.img`
+
+  width: 140px;
+  height: 50px;
+
+
+  position: absolute;
+  top: 14px;
+  left: 184px;
+`;
+
+export const searchDiv = styled.div`
+
+  position: absolute;
+  top: 17px;
+  left: 632px;
+
   display: flex;
   align-items: center;
-  background-color: green;
-  margin-left: 5rem;
-  margin-right: 5rem;
 `;
 
-export const HeaderText = styled.p`
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: white;
-  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+export const searchImg = styled.img`
+  width: 20px;
+  height: 20px;
+  
+  position: absolute;
+  left : 15px;
 `;
 
-export const Button = styled.div`
-  padding: 1rem;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-  border-radius: 0.6rem;
-  background-color: blue;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: white;
-  text-align: center;
-  cursor: pointer;
+export const searchInput = styled.input`
+  width: 312px;
+  height: 44px;
+
+  border-radius: 5px;
+  border: 1px solid gray;
+  gap: 6px;
+
+  text-indent: 45px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+`;
+
+export const iconDiv = styled.div`
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 22px;
+  left: 1045px;
+
+  width: 210;
+  height: 35px;
+
+`;
+
+export const homeImg = styled.img`
+  width: 24px;
+  height: 24px;
+  
+  margin-right: 20px;
+`;
+
+export const sendImg = styled.img`
+  width: 24px;
+  height: 24px;
+  
+  margin-right: 20px;
+`;
+
+export const plusImg = styled.img`
+  width: 24px;
+  height: 24px;
+  
+  margin-right: 20px;
+`;
+
+export const heartImg = styled.img`
+  width: 24px;
+  height: 24px;
+  
+  margin-right: 20px;
+`;
+
+export const profileImg = styled.img`
+  width: 35px;
+  height: 35px;
+
+  border-radius: 35px;
 `;

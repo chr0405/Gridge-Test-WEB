@@ -6,6 +6,7 @@ import { jwtState, nameState } from "../../recoil/login";
 import axios from 'axios';
 // import { REST_API_KEY, REDIRECT_URI } from '../../kakaoCode';
 import userApis from '../../apis/userApis';
+import AxiosInstance from "../../apis/axiosConfig";
 import styled from 'styled-components';
 
 import iphone1 from '../../img/iphone 13 mini.png';
@@ -93,12 +94,15 @@ const Login = () => {
         `https://api-sns.gridge-test.com/auth/sign-in`,
         { loginId, password }
       );
-      // 추후 삭제
-      console.log("연결 성공", response);
-      console.log('jwt 넣을게요');
-      setJwt(response.data.result.jwt);
-      console.log(jwt);
-      localStorage.setItem('jwt', jwt);
+      if(response && response.status === 200){
+        // 추후 삭제
+        console.log("연결 성공", response);
+        console.log('토큰 넣음');
+        AxiosInstance.defaults.headers.common[ "Authorization" ] = `Bearer ${response.data.result.jwt}`;
+        setJwt(response.data.result.jwt);
+        console.log(jwt);
+        localStorage.setItem('jwt', jwt);
+      }
     } catch (error) {
       // 추후 삭제
       console.log('오류 발생 : ', error);
@@ -124,7 +128,6 @@ const Login = () => {
       const response = await axios.get(`https://api-sns.gridge-test.com/users?loginId=${loginId}`);
       // 추후 삭제
       const isExist = response.data.result.isExist;
-      console.log(isExist);
       if(isExist){
         setWarningText('잘못된 비밀번호입니다. 다시 확인하세요.');
       } else {
@@ -135,6 +138,7 @@ const Login = () => {
       console.error('오류 발생 : ', error);
     }
   }
+
 
   const handleKakaoLogin = async () => {
     

@@ -10,10 +10,14 @@ const DefaultLayout = React.lazy(() => import("./layout/DefaultLayout"));
 
 // Pages
 const Login = React.lazy(() => import("./pages/login"));
+const KakaoLoggin = React.lazy(() => import("./pages/kakaoLoggin"));
+
 const SignUp1Page = React.lazy(() => import("./pages/signUp1"));
 const SignUp2Page = React.lazy(() => import("./pages/signUp2"));
 const SignUp3Page = React.lazy(() => import("./pages/signUp3"));
-const KakaoLoggin = React.lazy(() => import("./pages/kakaoLoggin"));
+
+const Payment = React.lazy(() => import("./pages/payment"));
+
 const Page404 = React.lazy(() => import("./pages/page404/Page404"));
 const Page500 = React.lazy(() => import("./pages/page500/Page500"));
 
@@ -30,6 +34,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={signUp1 ? (<SignUp1Page />) : signUp2 ? (<SignUp2Page />) : (<SignUp3Page />)} />
           <Route path="/login/kakao" element={<KakaoLoggin />} />
+          <Route path="/pay" element={<Payment/>}/>
 
           <Route path="/404" element={<Page404 />} />
           <Route path="/500" element={<Page500 />} />

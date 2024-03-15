@@ -6,8 +6,7 @@ const AxiosInstance = axios.create({
   withCredentials: true,
 
   headers: {
-    Authorization: `Bearer ${window.localStorage.getItem('jwt')}`,
-    // Authorization: `Bearer dfgfsdgsfgsfg`,
+    // Authorization: `Bearer ${window.localStorage.getItem('jwt')}`,
   },
 });
 
@@ -19,22 +18,28 @@ AxiosInstance.interceptors.response.use(
 
     async (error) => {
 
-        console.log("interceptors error", error);
+        // 추후 삭제
+        console.log('interceptors error', error.response);
         console.log(error.response.data.error);
 
         if(error.config.sent){
             return Promise.reject(error);
-        } else if(error.response.data.error === "INVALID_AUTH_TOKEN"){
+        } else if(error.response.data.error === 'INVALID_AUTH_TOKEN'){
+            // 토큰 때문에 생긴 에러라면
             error.config.sent = true;
-            console.log("전송 중에 수정");
-            const newToken = await authService();
 
-            if( newToken ){
-                error.config.headers.Authorization = newToken;
+            const token = window.localStorage.getItem('jwt');
+            if( token ){
+                console.log('전송 중에 수정');
+                const response = await authService(token);
+                if (response.result.jwt) {
+                    error.config.headers.Authorization = `Bearer ${response.result.jwt}`;
+                    console.log('수정 완료');
+                }
+                return AxiosInstance(error.config);
             }
-            return AxiosInstance(error.config);
+            return Promise.reject(error);
         }
-
         return Promise.reject(error);
     }
 )
