@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import * as S from './styles'
+import { useNavigate } from 'react-router-dom';
 
 import logo from '../../img/mainlogo.png';
 
@@ -12,8 +13,20 @@ import PlayStore from '../../img/Mobile app store badge.png';
 import AppStore from '../../img/Mobile app store badge (1).png';
 
 import { RequestPayParams, RequestPayResponse } from "./portone";
+import userApis from '../../apis/userApis';
+
 
 const Payment = () => {
+
+    const navigate = useNavigate();
+
+    const logined = localStorage.getItem('logined');
+
+    const isLoginedFunc = () => {
+        if(logined === 'false' || !logined){
+            navigate('/login');
+        }
+    }
 
     const onClickSubscriptionBtn = () => {
 
@@ -60,6 +73,37 @@ const Payment = () => {
         }
     }
 
+    const [feedCount, setFeedCount] = useState(0); 
+    const [followerCount, setFollowerCount] = useState(0); 
+    const [followingCount, setFollowingCount] = useState(0); 
+    const [loginId, setLoginId] = useState(''); 
+    const [realName, setRealName] = useState(''); 
+
+    const userInfoFunc = async () => {
+        try{
+            const loginIdSend = localStorage.getItem('loginId');
+            if(typeof loginIdSend === 'string'){
+                const response = await userApis.profile(loginIdSend);
+                console.log('userInfoFunc 성공 : ', response);
+                if(response){
+                    setFeedCount(response.data.result.feedCount);
+                    setFollowerCount(response.data.result.followerCount);
+                    setFollowingCount(response.data.result.followingCount);
+                    setLoginId(response.data.result.loginId);
+                    setRealName(response.data.result.realName);
+                }
+            }
+        } catch(error){
+            console.log('userInfoFunc 실패');
+        }
+    };
+
+    useEffect(() => {
+        userInfoFunc();
+        isLoginedFunc();
+    }, []);
+    
+
     return(
         <S.Root>
             <Header/>
@@ -103,25 +147,25 @@ const Payment = () => {
                     {/* 프로필 text */}
                     <S.ProfileInfoDiv>
                         <S.UserIdAndEditBtnDiv>
-                            <S.UserId>happypuppy</S.UserId>
+                            <S.UserId>{loginId}</S.UserId>
                             <S.EditBtn>프로필편집</S.EditBtn>
                         </S.UserIdAndEditBtnDiv>
                         <S.AnyNumberSetDiv>
                             <S.AnyNumberDiv>
                                 <S.AnyNameH5>게시물</S.AnyNameH5>
-                                <S.AnyNumberH4>83</S.AnyNumberH4>
+                                <S.AnyNumberH4>{feedCount}</S.AnyNumberH4>
                             </S.AnyNumberDiv>
                             <S.AnyNumberDiv>
                                 <S.AnyNameH5>팔로워</S.AnyNameH5>
-                                <S.AnyNumberH4>1,560</S.AnyNumberH4>
+                                <S.AnyNumberH4>{followerCount}</S.AnyNumberH4>
                             </S.AnyNumberDiv>
                             <S.AnyNumberDiv>
-                                <S.AnyNameH5>팔로워</S.AnyNameH5>
-                                <S.AnyNumberH4>21</S.AnyNumberH4>
+                                <S.AnyNameH5>팔로잉</S.AnyNameH5>
+                                <S.AnyNumberH4>{followingCount}</S.AnyNumberH4>
                             </S.AnyNumberDiv>
                         </S.AnyNumberSetDiv>
                         <S.IntroduceDiv>
-                            <S.IntroduceMentH6>블루</S.IntroduceMentH6>
+                            <S.IntroduceMentH6>{realName}</S.IntroduceMentH6>
                             <S.IntroduceMentGrayH6>여행</S.IntroduceMentGrayH6>
                             <S.Pre>
                                 <S.IntroduceMentH6>여행 다니는거 좋아해요 <br/>세계를 돌아다닙니다</S.IntroduceMentH6>

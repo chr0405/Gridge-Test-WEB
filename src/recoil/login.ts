@@ -10,6 +10,7 @@ const userState = atom({
   default: {
     name: "",
     jwt: "",
+    logined: false,
   },
 });
 
@@ -23,4 +24,10 @@ export const jwtState = selector({
   key: "jwtState",
   get: ({ get }) => get(userState).jwt,
   set: ({ get, set }, jwt) => set(userState, { ...get(userState), jwt }),
+});
+
+export const loginedState = selector({
+  key: "loginedState",
+  get: ({ get }) => get(userState).logined,
+  set: ({ get, set }, logined) => set(userState, { ...get(userState), logined }),
 });

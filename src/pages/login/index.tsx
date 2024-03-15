@@ -2,10 +2,9 @@ import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./styles";
 import { useRecoilState } from "recoil";
-import { jwtState, nameState } from "../../recoil/login";
+import { jwtState, nameState, loginedState } from "../../recoil/login";
 import axios from 'axios';
 // import { REST_API_KEY, REDIRECT_URI } from '../../kakaoCode';
-import userApis from '../../apis/userApis';
 import AxiosInstance from "../../apis/axiosConfig";
 import styled from 'styled-components';
 
@@ -23,6 +22,7 @@ const Login = () => {
   
   const [name, setName] = useRecoilState(nameState);
   const [jwt, setJwt] = useRecoilState(jwtState);
+  const [, setLogined] = useRecoilState(loginedState);
 
   // 아이디
   const onKeyUpId = (event: React.KeyboardEvent<HTMLElement>) => {
@@ -100,8 +100,12 @@ const Login = () => {
         console.log('토큰 넣음');
         AxiosInstance.defaults.headers.common[ "Authorization" ] = `Bearer ${response.data.result.jwt}`;
         setJwt(response.data.result.jwt);
+        setLogined(true);
+        console.log(response);
         console.log(jwt);
         localStorage.setItem('jwt', jwt);
+        localStorage.setItem('loginId', name);
+        localStorage.setItem('logined', 'true');
       }
     } catch (error) {
       // 추후 삭제
@@ -145,15 +149,6 @@ const Login = () => {
     // const kakaoLoginlink = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
     // window.location.href = kakaoLoginlink;
-
-    // 임시로 토큰 사용 api 연결 test
-    // 추후 삭제
-    try{
-      const response = await userApis.profile(name);
-      console.log('잘 받았어요 : ', response);
-    } catch(error){
-      console.log('잘 못 받았어요');
-    }
   };
 
   // 가입하기 이동
