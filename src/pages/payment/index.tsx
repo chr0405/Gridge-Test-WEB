@@ -15,7 +15,6 @@ import AppStore from '../../img/Mobile app store badge (1).png';
 import { RequestPayParams, RequestPayResponse } from "./portone";
 import userApis from '../../apis/userApis';
 
-
 const Payment = () => {
 
     const navigate = useNavigate();

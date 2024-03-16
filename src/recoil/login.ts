@@ -3,7 +3,7 @@
 // https://velog.io/@2ast/React-Recoil%EC%9D%98-atomFamily%EC%99%80-selectorFamily-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0
 // https://velog.io/@2ast/React-Recoil-selector%EB%A1%9C-%EB%A0%8C%EB%8D%94%EB%A7%81-%EC%B5%9C%EC%A0%81%ED%99%94%EC%97%90-%EA%B8%B0%EC%97%AC%ED%95%98%EA%B8%B0
 
-import { atom, selector } from "recoil";
+import { atom, selector, useRecoilCallback } from "recoil";
 
 const userState = atom({
   key: "userState",
@@ -31,3 +31,11 @@ export const loginedState = selector({
   get: ({ get }) => get(userState).logined,
   set: ({ get, set }, logined) => set(userState, { ...get(userState), logined }),
 });
+
+export const resetUserState = () => {
+  const resetStateCallback = useRecoilCallback(({ reset }) => () => {
+    reset(userState);
+  });
+  
+  resetStateCallback();
+};

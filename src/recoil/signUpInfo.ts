@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom, selector, useRecoilCallback } from "recoil";
 
 const signUpInfoState = atom({
   key: "signUpInfoState",
@@ -40,4 +40,11 @@ key: "birthDateInfoState",
 get: ({ get }) => get(signUpInfoState).birthDateInfo,
 set: ({ get, set }, birthDateInfo) => set(signUpInfoState, { ...get(signUpInfoState), birthDateInfo }),
 });
+
+export const resetSignUpInfoState = () => {
+  const resetStateCallback = useRecoilCallback(({ reset }) => () => {
+    reset(signUpInfoState);
+  });
   
+  resetStateCallback();
+};

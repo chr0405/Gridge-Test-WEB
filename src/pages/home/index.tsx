@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import * as S from './styles';
+import Header from '../../components/Header';
 
 const Home = () => {
   
@@ -8,19 +10,21 @@ const Home = () => {
   const logined = localStorage.getItem('logined');
 
   const isLoginedFunc = () => {
-    if(logined === 'false' || !logined){
-        navigate('/login');
+    if(!logined){
+      navigate('/login');
     }
   }
 
   useEffect(() => {
     isLoginedFunc();
   }, []);
-  
-  return (
-    <>
-    </>
+
+  return(
+    <S.Root>
+      <Header/>
+    </S.Root>
   );
+
 };
 
 export default Home;

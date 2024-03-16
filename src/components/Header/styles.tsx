@@ -106,3 +106,53 @@ export const profileImg = styled.img`
 
   border-radius: 35px;
 `;
+
+export const VisibleDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 72px;
+  left: 985px;
+
+  width: 280px;
+  height: 312px;
+
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #EAECF0;
+  box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.14);
+`;
+
+export const VisibleContentDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+
+  width: 240px;
+  height: 48px;
+
+  position: relative;
+
+  border-radius: 8px;
+
+  margin: 12px 30px;
+  gap: 16px;
+
+`;
+
+export const IconsImg = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
+export const IconsP = styled.p`
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: black;
+`;

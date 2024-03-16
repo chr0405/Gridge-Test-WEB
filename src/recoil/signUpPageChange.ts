@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom, selector, useRecoilCallback } from "recoil";
 
 const signUpPageState = atom({
   key: "signUpPageState",
@@ -26,4 +26,11 @@ export const signUp3State = selector({
     get: ({ get }) => get(signUpPageState).signUp3,
     set: ({ get, set }, signUp3) => set(signUpPageState, { ...get(signUpPageState), signUp3 }),
   });
+
+export const resetSignUpPageState = () => {
+  const resetStateCallback = useRecoilCallback(({ reset }) => () => {
+    reset(signUpPageState);
+  });
   
+  resetStateCallback();
+};

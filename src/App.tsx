@@ -7,6 +7,7 @@ const loading = <div>화면을 불러오는 중 입니다.</div>;
 
 // Containers
 const DefaultLayout = React.lazy(() => import("./layout/DefaultLayout"));
+const Home = React.lazy(() => import("./pages/home"));
 
 // Pages
 const Login = React.lazy(() => import("./pages/login"));
@@ -31,11 +32,11 @@ const App = () => {
     <BrowserRouter>
       <Suspense fallback={loading}>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={signUp1 ? (<SignUp1Page />) : signUp2 ? (<SignUp2Page />) : (<SignUp3Page />)} />
           <Route path="/login/kakao" element={<KakaoLoggin />} />
           <Route path="/pay" element={<Payment/>}/>
-
           <Route path="/404" element={<Page404 />} />
           <Route path="/500" element={<Page500 />} />
           <Route path="/*" element={<DefaultLayout />} />
