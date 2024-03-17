@@ -16,24 +16,22 @@ import bookMarkIcon from '../../img/bookMarkIcon (2).png'
 import settingIcon from '../../img/settingIcon.png'
 import reportIcon from '../../img/reportIcon (3).png'
 
-import { resetKakaoAuthorizationCodeState } from "../../recoil/kakaoLogin";
-import { resetUserState } from "../../recoil/login";
-import { resetSignUpInfoState } from "../../recoil/signUpInfo";
-import { resetSignUpPageState } from "../../recoil/signUpPageChange";
+// import { resetKakaoAuthorizationCodeState } from "../../recoil/kakaoLogin";
+// import { resetUserState } from "../../recoil/login";
+// import { resetSignUpInfoState } from "../../recoil/signUpInfo";
+// import { resetSignUpPageState } from "../../recoil/signUpPageChange";
 
 const AppHeader = () => {
   const navigate = useNavigate();
 
-  // const dispatch = useDispatch()
-  // const sidebarShow = useSelector((state) => state.sidebarShow)
   const [visible, setVisible] = useState(false)
 
   const logOut = () => {
     window.localStorage.clear();
-    resetKakaoAuthorizationCodeState();
-    resetUserState();
-    resetSignUpInfoState();
-    resetSignUpPageState();
+    // resetKakaoAuthorizationCodeState();
+    // resetUserState();
+    // resetSignUpInfoState();
+    // resetSignUpPageState();
     navigate('/login');
   }
 
