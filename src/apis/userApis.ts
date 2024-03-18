@@ -12,7 +12,7 @@ const user = {
         } catch (error){
             console.error('Error fetching profile:', error);
             console.log('user profile api 연결 실패');
-            return null
+            throw error;
         }
     },
 }

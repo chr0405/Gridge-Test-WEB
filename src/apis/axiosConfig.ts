@@ -24,7 +24,7 @@ AxiosInstance.interceptors.response.use(
 
         if(error.config.sent){
             return Promise.reject(error);
-        } else if(error.response.data.error === 'INVALID_AUTH_TOKEN'){
+        } else if(error.response.data.error === 'INVALID_AUTH_TOKEN' || 'Forbidden'){
             // 토큰 때문에 생긴 에러라면
             error.config.sent = true;
 
