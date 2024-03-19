@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 export const TotalDiv = styled.div`
-    width: 500px;
-    height: 35px;
+    /* width: 500px; */
+    /* height: 35px; */
 
-    margin: 20px 0px;
+    margin: 10px 0px;
 
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
+    align-items: flex-start;
+    justify-content: center;
 `;
 
 export const CommentWriter = styled.img`
@@ -18,6 +18,15 @@ export const CommentWriter = styled.img`
     border-radius: 35px;
 
     margin-right: 10px;
+`;
+
+export const TextDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    margin: 0px 0px;
 `;
 
 export const Comment = styled.p`
@@ -31,6 +40,8 @@ export const Comment = styled.p`
     line-height: 20px;
 
     color: #191919;
+
+    margin: 0px 0px;
 `;
 
 export const CommentStrong = styled.strong`
@@ -39,6 +50,7 @@ export const CommentStrong = styled.strong`
     line-height: 20px;
 
     color: #191919;
+    
 `;
 
 export const CommentTimeDiv = styled.div`
@@ -47,4 +59,5 @@ export const CommentTimeDiv = styled.div`
     line-height: 18px;
 
     color: #7F7F7F;
+    
 `;

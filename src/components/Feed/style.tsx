@@ -65,7 +65,7 @@ export const FeedMoreImg = styled.img`
   width: 24px;
   height: 24px;
 
-  margin-left: 370px;
+  margin-left: 360px;
 `;
 
 export const FeedDirectionDiv = styled.div`
@@ -117,8 +117,10 @@ export const HeartAndMessageDiv = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    position: absolute;
-    left: 123px;
+    position: relative;
+    left: 0px;
+
+    margin-right: 430px;
 `;
 
 export const HeartIconImg = styled.img`
@@ -140,14 +142,17 @@ export const ImgChartDiv = styled.div`
     height: 5px;
 
     border-radius: 5px;
+
+    margin: 0px 1px;
 `;
 
 export const BookmarkIconImg = styled.img`
     width: 24px;
     height: 24px;
 
-    position: absolute;
-    left: 589px;
+    position: relative;
+    left: 0px;
+    margin-left: -20px;
 `;
 
 export const LikedAndContents = styled.div`
@@ -219,6 +224,17 @@ export const CommentsAndTimeDiv = styled.div`
 `;
 
 // 댓글 하나 혹은 두 개가 보이는 경우
+
+export const CommentsDiv = styled.div`
+    width: 520px;
+
+    margin: 0px 0px 0px 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items:  flex-start;
+    justify-content: center;
+`;
 
 // 댓글 모두 보기가 보이는 경우
 
@@ -304,4 +320,3 @@ export const UploadDiv = styled.div`
     font-weight: 700;
     line-height: 20px;
 `;
-

@@ -1,11 +1,18 @@
 import styled from "styled-components";
 
-export const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  background-color: gray;
+export const TotalDiv = styled.div`
+  display: none;
 
-  margin: 1rem;
-  padding: 1rem;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 60px;
+
+  @media (max-width: 1000px) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: red;
+  }
 `;

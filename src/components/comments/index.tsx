@@ -19,7 +19,7 @@ const Comments: React.FC<FeedCommentProps> = ({
         <>
             <S.TotalDiv>
                 <S.CommentWriter src={profileImg}/>
-                <div>
+                <S.TextDiv>
                     <div>
                         <S.Comment>
                         <S.CommentStrong>{writeUserLoginId} </S.CommentStrong>
@@ -29,7 +29,7 @@ const Comments: React.FC<FeedCommentProps> = ({
                     <S.CommentTimeDiv>
                         30분 전
                     </S.CommentTimeDiv>
-                </div>
+                </S.TextDiv>
             </S.TotalDiv>
         </>
     )

@@ -22,6 +22,8 @@ const Payment = React.lazy(() => import("./pages/payment"));
 const Page404 = React.lazy(() => import("./pages/page404/Page404"));
 const Page500 = React.lazy(() => import("./pages/page500/Page500"));
 
+// const Board = React.lazy(() => import("./pages/board"));
+
 //컴포넌트
 const App = () => {
   const [signUp1, ] = useRecoilState(signUp1State);
@@ -39,6 +41,7 @@ const App = () => {
           <Route path="/pay" element={<Payment/>}/>
           <Route path="/404" element={<Page404 />} />
           <Route path="/500" element={<Page500 />} />
+          {/* <Route path="/board/:boardId" element={<Board />} /> */}
           <Route path="/*" element={<DefaultLayout />} />
         </Routes>
       </Suspense>

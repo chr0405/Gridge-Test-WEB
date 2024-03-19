@@ -87,6 +87,10 @@ export const RightContentDiv = styled.div`
 
     margin-top: 30px;
     margin-left: 52px;
+
+    @media (max-width: 1000px) {
+        display: none;
+    }
 `;
 
 export const ProfileDiv = styled.div`

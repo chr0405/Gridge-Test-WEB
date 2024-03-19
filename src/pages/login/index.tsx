@@ -109,6 +109,7 @@ const Login = () => {
         localStorage.setItem('jwt', response.data.result.jwt);
         localStorage.setItem('loginId', name);
         localStorage.setItem('logined', 'true');
+        localStorage.setItem('id', response.data.result.id);
         // 완료 시 홈으로 이동
         navigate(`/`);
       }

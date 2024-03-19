@@ -5,6 +5,8 @@ import Header from '../../components/Header';
 import userApis from '../../apis/userApis';
 import feedApis from '../../apis/feedApis';
 import FeedPost from "../../components/Feed";
+import { useRecoilState } from "recoil";
+import { scrollControlState } from "../../recoil/showBoard";
 
 import profileImg from '../../img/profileTestImg.png';
 import storyProfile1 from '../../img/storyprofile1.png'
@@ -86,7 +88,10 @@ const Home = () => {
     } catch(error) {
       console.error('피드 불러오기 오류: ', error);
     }
-  }
+  };
+
+  const [ scrollControl, setScrollControl ] = useRecoilState(scrollControlState);
+  
 
   useEffect(() => {
 
@@ -107,6 +112,12 @@ const Home = () => {
     window.addEventListener("scroll", scrollFunc);
     return () => window.removeEventListener("scroll", scrollFunc);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = scrollControl ? 'auto' : 'hidden';
+    console.log('setScrollControl', setScrollControl);
+    console.log('scrollControl', scrollControl);
+  }, [scrollControl]);
 
   useEffect(() => {
     if (fetching && nextPage) {

@@ -43,7 +43,7 @@ const feed = {
                     page
                 },
             });
-            console.log('comments api 연결 실패');
+            console.log('comments api 연결 성공');
             console.log(response.data);
             return response.data;
         } catch (error) {
@@ -51,7 +51,20 @@ const feed = {
             console.log('comments api 연결 실패');
             throw error;
         }
-    }
+    },
+
+    writeComment: async (feedId: number, commentText: string) => {
+        try {
+          const response = await axiosConfig.post(`/feeds/${feedId}/comment`, {
+            commentText,
+          });
+          console.log('writeComment api 연결 성공: ', response);
+          return response.data;
+        } catch (error) {
+          console.error('writeComment api 연결 실패: ', error);
+          throw error;
+        }
+      },
 };
 
 export default feed;
