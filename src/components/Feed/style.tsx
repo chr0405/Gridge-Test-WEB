@@ -65,7 +65,7 @@ export const FeedMoreImg = styled.img`
   width: 24px;
   height: 24px;
 
-  margin-left: 360px;
+  margin-left: 370px;
 `;
 
 export const FeedDirectionDiv = styled.div`

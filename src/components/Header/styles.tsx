@@ -21,34 +21,21 @@ export const Logo = styled.img`
   width: 140px;
   height: 50px;
 
-
-  position: absolute;
-  top: 14px;
-  left: 184px;
-
   @media (max-width: 1000px) {
-    position: relative;
-    top: 0px;
-    left: 0px;
-
     margin-right: 44px;
   }
+
+  margin-right: 308px;
 `;
 
 export const searchDiv = styled.div`
-
-  position: absolute;
-  top: 17px;
-  left: 632px;
+  width: 312px;
+  height: 44px;
 
   display: flex;
   align-items: center;
 
   @media (max-width: 1000px) {
-    position: relative;
-    top: 0px;
-    left: 0px;
-
     margin-left: 44px;
   }
 `;
@@ -56,9 +43,9 @@ export const searchDiv = styled.div`
 export const searchImg = styled.img`
   width: 20px;
   height: 20px;
-  
+
   position: absolute;
-  left : 15px;
+  margin-left: 15px;
 `;
 
 export const searchInput = styled.input`
@@ -82,16 +69,14 @@ export const iconDiv = styled.div`
   align-items: center;
   justify-content: center;
 
-  position: absolute;
-  top: 22px;
-  left: 1045px;
-
   width: 210;
   height: 35px;
 
   @media (max-width: 1000px) {
     display: none;
   }
+
+  margin-left: 101px;
 `;
 
 export const homeImg = styled.img`
@@ -131,17 +116,17 @@ export const profileImg = styled.img`
 `;
 
 export const VisibleDiv = styled.div`
-  display: flex;
+  display: fixed;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  position: absolute;
-  top: 72px;
-  left: 985px;
-
   width: 280px;
   height: 312px;
+
+  position: absolute;
+  top: 72px;
+  left: 895px;
 
   background-color: white;
   border-radius: 8px;
@@ -193,7 +178,6 @@ export const FooterDiv = styled.div`
 
   z-index: 1;
 
-  /* border-top: 1px solid gray; */
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 
   @media (max-width: 1000px) {

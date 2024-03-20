@@ -10,3 +10,4 @@ build-stage/*
 build/*
 config.ts
 kakaoCode.ts
+Firebase.ts

@@ -25,9 +25,10 @@ export const BoardContentDiv = styled.div`
     width: 1072px;
     height: 698px;
 
-    position: absolute;
-    top: 5%;
-    left: 18%;
+    position: fixed; 
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
 
     background-color: white;
 

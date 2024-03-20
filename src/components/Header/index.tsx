@@ -50,8 +50,8 @@ const AppHeader = () => {
           setShowMakeFeed={setShowMakeFeed}
         />
       }
-      <S.Header>
-        <S.VisibleDiv style={{display : visible? 'block' : 'none'}}>
+      {visible &&
+        <S.VisibleDiv style={{display : 'block'}}>
           <S.VisibleContentDiv>
             <S.IconsImg src={profileIcon}/>
             <S.IconsP>프로필</S.IconsP>
@@ -73,6 +73,8 @@ const AppHeader = () => {
             <S.IconsP>로그아웃</S.IconsP>
           </S.VisibleContentDiv>
         </S.VisibleDiv>
+      }
+      <S.Header>
         
         <S.Logo src={logo}
           onClick={() => {

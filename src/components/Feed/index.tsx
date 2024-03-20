@@ -114,10 +114,6 @@ const FeedPost: React.FC<FeedPostProps> = ({
     }
   };
 
-  // const boardFunc = (props : FeedPostProps) => {
-  //   navigate(`/board/${id}`, { state: { ...props } });
-  // };
-
   const [showBoard, setShowBoard] = useState(false); // 상태 관리
   
   const [comment, setComment] = useState('');

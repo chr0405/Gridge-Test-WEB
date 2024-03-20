@@ -149,6 +149,11 @@ const Board: React.FC<BoardPostProps> = ({
 
   const [ , setScrollControl] = useRecoilState(scrollControlState);
 
+  const [viewSetting, setViewSetting] = useState(false);
+
+  const viewSettingFunc =  () => {
+  }
+
 
     return(
         <S.BoardDiv onClick={() => {
@@ -193,7 +198,8 @@ const Board: React.FC<BoardPostProps> = ({
                 <S.BoardRightFirstDiv>
                     <S.FirstImg src={profileImg}/>
                     <S.BoardIdH1>{feedLoginId}</S.BoardIdH1>
-                    <S.FirstImg2 src={moreHorizontal}/>
+                    <S.FirstImg2 src={moreHorizontal}
+                    onClick={viewSettingFunc}/>
                 </S.BoardRightFirstDiv>
                 {/* 프사, 아이디, 본문 */}
                 <S.BoardRightSecondDiv onScroll={handleScroll}>

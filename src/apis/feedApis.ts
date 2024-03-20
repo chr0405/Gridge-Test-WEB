@@ -64,7 +64,45 @@ const feed = {
           console.error('writeComment api 연결 실패: ', error);
           throw error;
         }
-      },
+    },
+
+    writeFeed: async (feedText : string, contentUrls : string[]) => {
+        try {
+          const response = await axiosConfig.post("/feeds", {
+            feedText,
+            contentUrls
+          });
+          console.log('writeFeed api 연결 성공: ', response);
+          return response.data;
+        } catch (error) {
+            console.error('writeFeed api 연결 실패: ', error);
+          throw error;
+        }
+    },
+
+    deleteFeed: async (feedId: number) => {
+        try {
+          const response = await axiosConfig.patch(`/feeds/${feedId}/inactive`);
+          console.log('deleteFeed api 연결 성공: ', response);
+          return response.data;
+        } catch (error) {
+            console.error('deleteFeed api 연결 실패: ', error);
+          throw error;
+        }
+    },
+
+    updateFeed: async (feedId: number, feedText: string) => {
+        try {
+          const response = await axiosConfig.patch(`/feeds/${feedId}`, {
+            feedText,
+          });
+          console.log('updateFeed api 연결 성공: ', response);
+          return response.data;
+        } catch (error) {
+            console.error('updateFeed api 연결 실패: ', error);
+          throw error;
+        }
+    },
 };
 
 export default feed;
