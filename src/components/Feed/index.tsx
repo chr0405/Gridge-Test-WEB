@@ -129,6 +129,7 @@ const FeedPost: React.FC<FeedPostProps> = ({
               console.log('submitCommentFunc 성공', response);
               setComment('');
               setCanSubmit(false);
+              setTotalCommentCount(totalCommentCount + 1);
               if(loginId){
                   setComments(
                       comments.concat({

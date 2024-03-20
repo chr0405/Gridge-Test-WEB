@@ -69,28 +69,33 @@ const Home = () => {
   // 10개의 게시물을 담을 배열
   const [posts, setPosts] = useState<Post[]>([]);
   // 페이지
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   // 데이터를 가져오고 있는지
   const [fetching, setFetching] = useState(false);
   // 다음 페이지가 존재하는지
   const [nextPage, setNextPage] = useState(true);
 
+  const [page, ] = useState(1);
+  const [controlPage, setControlPage] = useState(0);
+
   const feedsLoadFunc = async () => {
     try {
       const response = await feedApis.feeds(page);
-      console.log('feedsLoadFunc로 불러온 값', response);
-      console.log('현재 페이지', page);
-      // 기존 배열에 추가
-      setPosts(posts.concat(response.result.feedList));
-      setPage(page + 1);
-      setNextPage(response.result.lastPage >= page);
+      const lastPage = response.result.lastPage;
+      const nextPage = lastPage - controlPage;
+      const response2 = await feedApis.feeds(nextPage);
+      console.log('feedsLoadFunc로 불러온 값', response2);
+      const reversedNewPosts = response2.result.feedList.reverse();
+      setPosts(posts.concat(reversedNewPosts));
+      setControlPage(prevControlPage => prevControlPage + 1);
+      setNextPage(nextPage !== 0);
       setFetching(false);
     } catch(error) {
       console.error('피드 불러오기 오류: ', error);
     }
   };
 
-  const [ scrollControl, setScrollControl ] = useRecoilState(scrollControlState);
+  const [ scrollControl,  ] = useRecoilState(scrollControlState);
   
 
   useEffect(() => {
@@ -115,8 +120,6 @@ const Home = () => {
 
   useEffect(() => {
     document.body.style.overflow = scrollControl ? 'auto' : 'hidden';
-    console.log('setScrollControl', setScrollControl);
-    console.log('scrollControl', scrollControl);
   }, [scrollControl]);
 
   useEffect(() => {

@@ -115,6 +115,23 @@ export const profileImg = styled.img`
   border-radius: 35px;
 `;
 
+export const VisibleTotalDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 72px;
+
+  width: 1440px;
+  height: 312px;
+
+  @media (max-width: 1000px) {
+    display: none;
+  }
+`;
+
 export const VisibleDiv = styled.div`
   display: fixed;
   flex-direction: column;
@@ -124,9 +141,7 @@ export const VisibleDiv = styled.div`
   width: 280px;
   height: 312px;
 
-  position: absolute;
-  top: 72px;
-  left: 895px;
+  margin-left: 805px;
 
   background-color: white;
   border-radius: 8px;

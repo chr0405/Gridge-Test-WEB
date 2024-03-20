@@ -51,6 +51,7 @@ const AppHeader = () => {
         />
       }
       {visible &&
+      <S.VisibleTotalDiv>
         <S.VisibleDiv style={{display : 'block'}}>
           <S.VisibleContentDiv>
             <S.IconsImg src={profileIcon}/>
@@ -73,6 +74,7 @@ const AppHeader = () => {
             <S.IconsP>로그아웃</S.IconsP>
           </S.VisibleContentDiv>
         </S.VisibleDiv>
+      </S.VisibleTotalDiv>
       }
       <S.Header>
         
