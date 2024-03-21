@@ -16,7 +16,7 @@ const Board = () => {
     console.log('Feed Login Id:', feedLoginId);
     console.log('Feed Text:', feedText);
     console.log('ID:', id);
-    console.log('씨발 뭐야');
+    console.log('');
 
     return (
         <div>
