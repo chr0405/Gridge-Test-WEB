@@ -1,10 +1,10 @@
-/src
-//apis
-  authService.ts - 토큰 재발급api
-  axiosConfig.ts - 토큰 필요한 api 전송할 때 전용으로 만든 axios 모듈
-  feedApis.ts - 피드 게시물 관련api
-  Firebase.ts - Firebase key 값 저장
-  userApis.ts - 로그인 관련 api
+/src  
+//apis  
+  authService.ts - 토큰 재발급api  
+  axiosConfig.ts - 토큰 필요한 api 전송할 때 전용으로 만든 axios 모듈  
+  feedApis.ts - 피드 게시물 관련api  
+  Firebase.ts - Firebase key 값 저장  
+  userApis.ts - 로그인 관련 api  
 //components
   //Board - 게시글을 board로 띄울 때, 내 게시물의 경우 수정과 삭제 기능
   //comments - 댓글
