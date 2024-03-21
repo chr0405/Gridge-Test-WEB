@@ -59,6 +59,11 @@ const MakeFeed: React.FC<MakeFeedProps> = ({
                     event.target.value = "";
                     return;
                 }
+                if (!file.type.includes("image")) {
+                    alert("이미지 파일만 선택할 수 있습니다.");
+                    return;
+                }
+
                 const url = URL.createObjectURL(file);
                 setStringTypePictures((prev) => [...prev, url]);
             }
