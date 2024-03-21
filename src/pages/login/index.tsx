@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./styles";
 import { useRecoilState } from "recoil";
 import { jwtState, nameState, loginedState } from "../../recoil/login";
 import axios from 'axios';
-import { REST_API_KEY, REDIRECT_URI } from '../../kakaoCode';
+import { /* REST_API_KEY, */REDIRECT_URI, Javascript_API_KEY } from '../../kakaoCode';
 import AxiosInstance from "../../apis/axiosConfig";
 import styled from 'styled-components';
 
@@ -16,6 +16,12 @@ import lock from '../../img/mail (1).png';
 import kakao from '../../img/Frame 10725.png';
 import PlayStore from '../../img/Mobile app store badge.png';
 import AppStore from '../../img/Mobile app store badge (1).png';
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
 
 const Login = () => {
   const navigate = useNavigate();
@@ -149,10 +155,25 @@ const Login = () => {
     }
   }
 
+  const initKakao = () => {
+    const jsKey = Javascript_API_KEY;
+    const Kakao = window.Kakao;
+    if (Kakao && !Kakao.isInitialized()) {
+      Kakao.init(jsKey);
+      console.log('kakao 초기화', Kakao.isInitialized());
+    }
+  };
+
+  useEffect(() => {
+    initKakao();
+  }, []);
+
 
   const handleKakaoLogin = async () => {
-    const kakaoLoginlink = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-    window.location.href = kakaoLoginlink;
+    const Kakao = window.Kakao;
+    Kakao.Auth.authorize({
+      redirectUri: REDIRECT_URI,
+    });
   };
 
   // 가입하기 이동

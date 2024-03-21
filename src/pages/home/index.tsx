@@ -99,7 +99,6 @@ const Home = () => {
   
 
   useEffect(() => {
-
     // 처음 랜더링될 때 데이터 가져옴
     setFetching(true);
 
