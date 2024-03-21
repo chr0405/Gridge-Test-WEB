@@ -34,7 +34,7 @@ const user = {
     kakaoSignUp : async (accessToken : string, loginId : string, password :  string, realName : string, phone : string, birthDate : string) => {
         try{
             console.log('kakaoSignUp에서 토큰 검사 : ', accessToken);
-            const response = await axios.post(`https://api-sns.gridge-test.com/auth/kakao/sign-up-by-token`, {
+            const response = await axiosConfig.post(`/auth/kakao/sign-up-by-token`, {
                 accessToken,
                 loginId,
                 password,
@@ -43,7 +43,7 @@ const user = {
                 birthDate,
             });
             console.log('kakaoSignUp api 연결 성공 : ', response);
-            return response
+            return response;
         } catch (error){
             console.log('kakaoSignUp api 연결  실패 : ', error);
             throw error;

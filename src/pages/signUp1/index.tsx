@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./styles";
 import { useRecoilState } from "recoil";
+import { kakaoTokenState } from "../../recoil/kakaoLogin";
 import { signUp1State, signUp2State/*, signUp3State*/ } from "../../recoil/signUpPageChange";
 import { loginIdInfoState, passwordInfoState, realNameInfoState, phoneInfoState} from "../../recoil/signUpInfo";
 import axios from 'axios';
 import styled from 'styled-components';
+import userApis from "../../apis/userApis";
 
 // import request from '../../apis/core/index';
 import * as U from "../../utils/utility"
@@ -202,6 +204,41 @@ const SignUp = () => {
     }
   }
 
+  const [accessToken, ] = useRecoilState(kakaoTokenState);
+
+  const kakaoBtnFunc = () => {
+    if(! U.isValidPhoneNumber(phoneNumder)){
+      setWarning("휴대폰 번호가 정확하지 않습니다. 국가번호를 포함하여 전체 전화번호를 입력해주세요.");
+    } else if(! userIdTestResult){
+      // console.log(userIdTestAllResult);
+      setWarning("사용자 이름에는 문자, 숫자, 밑줄 및 마침표만 사용할 수 있습니다");
+    } else if(! userIdExistTest){
+      setWarning("사용할 수 없는 사용자 이름입니다. 다른 이름을 사용하세요.");
+      // setSignUpCheckBtn(false);
+    } else if(!(pwdTest.test(pwd) && pwd.length > 5)){
+      setWarning("");
+    }
+    else{
+      kakaoSignUpFunc();
+    }
+  }
+
+  const kakaoSignUpFunc = async () => {
+    try{
+      const response = await userApis.kakaoSignUp(
+        accessToken, userId, pwd, userName, phoneNumder, '2000-01-01'
+      );
+        console.log(response);
+        localStorage.setItem('loginId', response.data.result.loginId);
+        localStorage.setItem('id', response.data.result.id);
+        navigate('/');
+    } catch(error){
+        console.log(error);
+        alert('카카오 로그인부터 진행해주세요.');
+        navigate('/login');
+    }
+  }
+
   // 로그인 이동
   const handleLogin = () => {
     navigate(`/login`);
@@ -221,9 +258,9 @@ const SignUp = () => {
             친구들과 함께 여행 이야기를 공유하고 보세요.
           </S.LogoTextDiv>
 
-          <S.KaKaoLoginBtn>
+          <S.KaKaoLoginBtn onClick={kakaoBtnFunc}>
             <S.KakaoImg src={kakao}/>
-            <S.KakaoText>카카오 로그인</S.KakaoText>
+            <S.KakaoText>카카오로 회원가입</S.KakaoText>
           </S.KaKaoLoginBtn>
           
           <S.Or>

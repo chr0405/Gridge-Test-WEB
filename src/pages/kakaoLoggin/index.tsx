@@ -1,12 +1,14 @@
 // redirect 되는 화면
 
-import React, { useState } from "react";
+import React from "react";
 // import { useRecoilState } from "recoil";
 // import { authorizationCodeState } from "../../recoil/kakaoLogin";
 import { useNavigate } from "react-router-dom";
 import { REST_API_KEY/*, REDIRECT_URI */} from '../../kakaoCode';
 import axios from 'axios';
 import userApis from "../../apis/userApis";
+import { kakaoTokenState } from "../../recoil/kakaoLogin";
+import { useRecoilState } from "recoil";
 
 declare global {
     interface Window {
@@ -18,7 +20,7 @@ declare global {
 const KakaoLoggin = () => {
 
     const navigate = useNavigate();
-    const [accessToken, setAccessToken] = useState('');
+    const [, setAccessToken] = useRecoilState(kakaoTokenState);
 
     // 인가 코드
 
@@ -38,8 +40,8 @@ const KakaoLoggin = () => {
             })
             .then(response => {
                 console.log('카카오 로그인 토큰 받아오기 성공 : ', response);
-                const newToken = response.data.access_token;
-                setAccessToken(newToken);
+                setAccessToken(response.data.access_token);
+                SendToServerFunc(response.data.access_token);
             })
             .catch(error => {
                 console.error('카카오 로그인 토큰 받아오기 실패 : ', error);
@@ -47,11 +49,9 @@ const KakaoLoggin = () => {
         }
     }
 
-    const [notFoundError, setNotFoundError] = useState(0);
-
-    const SendToServerFunc = async () => {
+    const SendToServerFunc = async (LoginToken : string) => {
         try{
-            const response = await userApis.kakaoLogin(accessToken);
+            const response = await userApis.kakaoLogin(LoginToken);
             console.log('userInfoFunc 성공 : ', response);
             localStorage.setItem('jwt', response.data.result.jwt);
             localStorage.setItem('loginId', response.data.result.loginId);
@@ -59,46 +59,14 @@ const KakaoLoggin = () => {
             localStorage.setItem('id', response.data.result.id);
             navigate('/');
         } catch(error){
-            if (error && typeof error === 'object' && 'response' in error && error.response && typeof error.response === 'object') {
-                const responseError = error.response as { status?: number };
-                if (responseError.status) {
-                    console.error('userInfoFunc 실패1. Error code:', responseError.status);
-                    setNotFoundError(responseError.status);
-                } else {
-                    console.error('userInfoFunc 실패2. Error:', error);
-                }
-            } else {
-                console.error('userInfoFunc 실패3. Error:', error);
-            }
+            console.log(error);
+            navigate('/sign-up');
         }
     };
 
-    const SignUpKakaoFunc = async () => {
-        // try{
-        //     const response = await userApis.kakaoLogin(accessToken);
-        //     console.log('userInfoFunc 성공 : ', response);
-        // } catch(error){
-        //     if (error && typeof error === 'object' && 'response' in error && error.response && typeof error.response === 'object') {
-        //         const responseError = error.response as { status?: number };
-        //         if (responseError.status) {
-        //             console.error('userInfoFunc 실패1. Error code:', responseError.status);
-        //             setNotFoundError(responseError.status);
-        //         } else {
-        //             console.error('userInfoFunc 실패2. Error:', error);
-        //         }
-        //     } else {
-        //         console.error('userInfoFunc 실패3. Error:', error);
-        //     }
-        // }
-    };
-
-    React.useEffect( () => {
-        SignUpKakaoFunc();
-    }, [notFoundError]);
-
-    React.useEffect( () => {
-        SendToServerFunc();
-    }, [accessToken]);
+    // React.useEffect( () => {
+    //     SendToServerFunc();
+    // }, [accessToken]);
 
 
     React.useEffect( () => {
