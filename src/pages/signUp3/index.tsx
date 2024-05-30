@@ -53,7 +53,7 @@ const SignUp3 = () => {
     const [password, ] = useRecoilState(passwordInfoState);
     const [birthDate, ] = useRecoilState(birthDateInfoState);
 
-    const [statusNumber, setStatusNumber] = useState(0);
+    const [/*statusNumber*/, setStatusNumber] = useState(0);
 
     const sendUserInfoFunc = async () => {
         // 추후 삭제
@@ -75,24 +75,29 @@ const SignUp3 = () => {
           // 추후 삭제
           console.log(response.status);
           setStatusNumber(response.status);
+          return response.status
         } catch (error) {
           // 추후 삭제
           console.error('오류 발생 : ', error);
+          return 400
         }
       }
 
     // 로그인
 
     const NextFunc = () => {
-        sendUserInfoFunc();
-        if(statusNumber === 201){
+        let responseNumber = sendUserInfoFunc();
+        if(typeof responseNumber === 'number' && responseNumber === 201){
             setSignUp1(true);
             setSignUp2(false);
             navigate(`/login`);
-        } else if(statusNumber === 201){
+        } else if(typeof responseNumber === 'number' && responseNumber === 400){
             alert('아이디가 중복되었거나 조건에 맞지 않습니다. 다시 시도해주세요.');
         } else{
-            alert('서버 에러');
+            alert('로그인 해주세요.');
+            setSignUp1(true);
+            setSignUp2(false);
+            navigate(`/login`);
         }
     }
 
