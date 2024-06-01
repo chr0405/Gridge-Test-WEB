@@ -32,7 +32,7 @@ const KakaoLoggin = () => {
         if (typeof code === 'string'){
             console.log(code);
             axios.post("https://kauth.kakao.com/oauth/token", 
-            `grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=http://localhost:3000/login/kakao&code=${code}`, 
+            `grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=https://tnovel-three.vercel.app/login/kakao&code=${code}`, 
             {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
