@@ -8,6 +8,6 @@ yarn.lock
 build-dev/*
 build-stage/*
 build/*
-config.ts
+# config.ts
 # kakaoCode.ts
-Firebase.ts
+# Firebase.ts
