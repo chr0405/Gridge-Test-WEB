@@ -1,5 +1,5 @@
 # ✈️Tnovel
-![main](https://github.com/chr0405/Gridge-Test-WEB/assets/129362281/446e6101-2c6d-4100-9861-ddc3538281f0)
+![main](https://github.com/chr0405/Gridge-Test-WEB/assets/129362281/c6404a74-496b-4f17-9258-5e3c1cf3a749)\
 나만의 여행 이야기를 만들어보세요.
 
 /src<br/>
