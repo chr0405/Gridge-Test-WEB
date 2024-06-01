@@ -1,3 +1,3 @@
-export const REST_API_KEY = '44a90896f3ee78d0e03712d6cd025cfd';
+export const REST_API_KEY = '9607a85595de4234fdbd580066c0b4b2';
 export const REDIRECT_URI = 'https://tnovel-three.vercel.app/login/kakao';
-export const Javascript_API_KEY = '2df66a4e26ee3c1f5d6b0d778bec2dba';
+export const Javascript_API_KEY = '16e2bba677d384bc24360e0125044688';
