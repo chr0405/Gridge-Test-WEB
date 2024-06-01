@@ -9,5 +9,5 @@ build-dev/*
 build-stage/*
 build/*
 config.ts
-kakaoCode.ts
+# kakaoCode.ts
 Firebase.ts

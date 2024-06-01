@@ -4,7 +4,7 @@ import React from "react";
 // import { useRecoilState } from "recoil";
 // import { authorizationCodeState } from "../../recoil/kakaoLogin";
 import { useNavigate } from "react-router-dom";
-import { REST_API_KEY/*, REDIRECT_URI */} from '../../kakaoCode';
+import { REST_API_KEY} from '../../kakaoCode';
 import axios from 'axios';
 import userApis from "../../apis/userApis";
 import { kakaoTokenState } from "../../recoil/kakaoLogin";

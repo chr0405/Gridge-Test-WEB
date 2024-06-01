@@ -4,7 +4,7 @@ import * as S from "./styles";
 import { useRecoilState } from "recoil";
 import { jwtState, nameState, loginedState } from "../../recoil/login";
 import axios from 'axios';
-import { /* REST_API_KEY, */REDIRECT_URI, Javascript_API_KEY } from '../../kakaoCode';
+import {REDIRECT_URI, Javascript_API_KEY } from '../../kakaoCode';
 import AxiosInstance from "../../apis/axiosConfig";
 import styled from 'styled-components';
 
