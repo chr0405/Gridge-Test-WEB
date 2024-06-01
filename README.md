@@ -1,7 +1,21 @@
 # ✈️Tnovel
+
 ![main](https://github.com/chr0405/Gridge-Test-WEB/assets/129362281/c6404a74-496b-4f17-9258-5e3c1cf3a749)\
 나만의 여행 이야기를 만들어보세요.
 
+## 💙Tnovel이란?
+
+Gridge test를 통해 진행한 몰입 시뮬레이션 챌린지입니다.\
+인스타그램의 핵심 기능을 개발해보는 챌린지이며,\
+핵심 구현 기능으로 유저 맵, 게시물 맵, 결제 맵이 있습니다.
+
+## 🐬Demo
+
+Web site : [tnovel-three.vercel.app/](tnovel-three.vercel.app/)\
+youtube : [시연 연상](https://www.youtube.com/watch?v=87onRxoCdH8)
+
+## 📘파일 구조
+```
 /src<br/>
   ├── apis<br/>
   │   ├── authService.ts  # 토큰 재발급 API<br/>
@@ -32,3 +46,4 @@
   │   └── signUpPageChange.ts  # 회원가입 페이지 전환 상태 관리<br/>
   ├── App.tsx  # 메인 App 컴포넌트<br/>
   └── kakaoCode.ts   # 카카오 관련 키 값 저장<br/>
+```
