@@ -14,7 +14,8 @@
     "build-stage": "dotenv -e .env.stage react-scripts build",
     "build-prod": "dotenv -e .env.production react-scripts build",
     "start": "react-scripts start",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build": "dotenv -e .env.production react-scripts build"
   },
   "dependencies": {
     "axios": "^0.26.1",
