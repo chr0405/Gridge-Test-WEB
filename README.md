@@ -11,7 +11,7 @@ Gridge test를 통해 진행한 몰입 시뮬레이션 챌린지입니다.\
 
 ## 🐬Demo
 
-Web site : [tnovel-three.vercel.app/](tnovel-three.vercel.app/)\
+Web site : [tnovel-three.vercel.app](tnovel-three.vercel.app)\
 youtube : [시연 연상](https://www.youtube.com/watch?v=87onRxoCdH8)
 
 ## 📘파일 구조
