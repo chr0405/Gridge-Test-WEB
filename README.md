@@ -14,6 +14,20 @@ Gridge test를 통해 진행한 몰입 시뮬레이션 챌린지입니다\
 Web site : [Demol-three.vercel.app](tnovel-three.vercel.app)\
 youtube : [시연 연상](https://www.youtube.com/watch?v=87onRxoCdH8)
 
+## ⌚개발 기간
+
+2024.03
+
+## 🔎Front-end 기술 스택
+<p>
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"/>
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
+  <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"/>
+</p>
+
+
 ## 📘파일 구조
 ```
 💼src
