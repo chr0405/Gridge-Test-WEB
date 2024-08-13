@@ -27,6 +27,11 @@ youtube : [시연 연상](https://www.youtube.com/watch?v=87onRxoCdH8)
   <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"/>
 </p>
 
+## 💻주요 기능
+• 회원 관리 시스템 (회원 가입, 일반 로그인 & 소셜 로그인)\
+• 포트원을 이용한 구독 서비스 결제 시스템\
+• 게시물 관리 기능 (등록, 수정, 삭제, 무한 스크롤)\
+• 사용자 상호작용 기능 (좋아요, 댓글 달기)
 
 ## 📘파일 구조
 ```
